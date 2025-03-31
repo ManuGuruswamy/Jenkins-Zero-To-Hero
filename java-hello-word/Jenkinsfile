@@ -1,15 +1,22 @@
 pipeline { 
     agent any
     stages {
-        stage('Compile Java') {
+        stage('Check Workspace & Compile Java') {
             steps {
-                sh 'ls -l'  // List files to verify presence
-                sh 'javac HelloWorld.java'
+                script {
+                    sh 'pwd'       // Print current directory (for debugging)
+                    sh 'ls -l'     // List files (ensure HelloWorld.java is present)
+                    sh 'javac HelloWorld.java'
+                }
             }
         }
         stage('Run Java Program') {
             steps {
-                sh 'java HelloWorld'
+                script {
+                    sh 'pwd'       // Debugging to check the current directory
+                    sh 'ls -l'     // Confirm compiled HelloWorld.class exists
+                    sh 'java HelloWorld'
+                }
             }
         }
     }
