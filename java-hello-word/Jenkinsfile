@@ -4,17 +4,16 @@ pipeline {
         stage('Check Workspace & Compile Java') {
             steps {
                 script {
-                    sh 'pwd'       // Print current directory (for debugging)
-                    sh 'ls -l'     // List files (ensure HelloWorld.java is present)
-                    sh 'javac HelloWorld.java'
+                    sh 'echo "Current Directory:" && pwd'   // Check current directory
+                    sh 'echo "Listing files:" && ls -l'     // Check if HelloWorld.java is present
+                    sh 'javac HelloWorld.java'              // Compile Java file
                 }
             }
         }
         stage('Run Java Program') {
             steps {
                 script {
-                    sh 'pwd'       // Debugging to check the current directory
-                    sh 'ls -l'     // Confirm compiled HelloWorld.class exists
+                    sh 'echo "Running Java Program..."'
                     sh 'java HelloWorld'
                 }
             }
