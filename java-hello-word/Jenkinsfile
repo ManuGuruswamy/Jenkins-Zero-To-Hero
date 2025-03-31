@@ -1,25 +1,15 @@
-pipeline {
+pipeline { 
     agent any
     stages {
-        stage('Checkout Code') {
-            steps {
-                script {
-                    echo "Fetching source code..."
-                }
-            }
-        }
         stage('Compile Java') {
             steps {
-                script {
-                    sh 'javac HelloWorld.java'
-                }
+                sh 'ls -l'  // List files to verify presence
+                sh 'javac HelloWorld.java'
             }
         }
         stage('Run Java Program') {
             steps {
-                script {
-                    sh 'java HelloWorld'
-                }
+                sh 'java HelloWorld'
             }
         }
     }
