@@ -1,19 +1,17 @@
 pipeline { 
     agent any
     stages {
-        stage('Check Workspace & Compile Java') {
+        stage('Compile Java') {
             steps {
-                script {
-                    sh 'echo "Current Directory:" && pwd'   // Check current directory
-                    sh 'echo "Listing files:" && ls -l'     // Check if HelloWorld.java is present
-                    sh 'javac HelloWorld.java'              // Compile Java file
+                dir('java-hello-word') {  // Ensure we are inside the correct folder
+                    sh 'ls -l'            // Verify HelloWorld.java exists
+                    sh 'javac HelloWorld.java'
                 }
             }
         }
         stage('Run Java Program') {
             steps {
-                script {
-                    sh 'echo "Running Java Program..."'
+                dir('java-hello-word') {  // Ensure we are inside the correct folder
                     sh 'java HelloWorld'
                 }
             }
