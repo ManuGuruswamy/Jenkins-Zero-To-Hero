@@ -1,8 +1,15 @@
 pipeline {
-  agent {
-    docker {
-      image 'manuguruswamy/ultimate-cicd-pipeline:v1' // Java 17 + Maven
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+  agent any
+  stages {
+    stage('Run Inside Docker') {
+      steps {
+        script {
+          docker.image('manuguruswamy/ultimate-cicd-pipeline:v1').inside('--user root -v /var/run/docker.sock:/var/run/docker.sock') {
+            sh 'docker --version'
+            sh 'mvn -version'
+          }
+        }
+      }
     }
   }
   stages {
