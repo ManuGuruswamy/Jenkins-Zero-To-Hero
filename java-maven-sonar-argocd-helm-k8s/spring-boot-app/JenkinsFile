@@ -71,6 +71,9 @@ pipeline {
             echo "Updating image tag in deployment file..."
             git config user.email "manu.xyz@gmail.com"
             git config user.name "Manu Guruswamy"
+             # Copy template to deployment.yml
+            cp java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment-template.yml java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
+
             sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
             git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
             git commit -m "Update deployment image to version ${BUILD_NUMBER}" || echo "No changes to commit"
